@@ -1,70 +1,125 @@
+.PHONY: install
 ## Install for production
+## @category Install
 install:
 	pip install --update pip
 	poetry install --no-root
 
+.PHONY: install-dev
 ## Install dev requirements
+## @category Install
 install-dev:
 	poetry install  --no-root --extras=dev
 
+.PHONY: install-all
 ## Install all extras
+## @category Install
 install-all:
 	poetry install --no-root --all-extras
 
+.PHONY: clean
+## Clean pycaches
+## @category Build
+clean:
+	 ./bin/clean-pycache.sh
+
+.PHONY: build
 ## Build package
+## @category Build
 build:
 	poetry build
 
+.PHONY: publish
 ## Publish package to pypi
+## @category Deploy
 publish:
 	poetry publish
 
+.PHONY: update
 ## Update dependencies
+## @category Update
 update:
-	./update-deps.sh
+	./bin/update-deps.sh
 
+.PHONY: update-builder
+## Update builder requirements
+## @category Update
+update-builder:
+	./bin/update-builder-requirement.sh
+
+## version
+## @category Update
+V :=
+.PHONY: version
+## Show or set project version
+## @category Update
+version:
+	bin/version.sh $(V)
+
+.PHONY: kill-eslint_d
+## Kill eslint daemon
+## @category Lint
+kill-eslint_d:
+	bin/kill-eslint_d.sh
+
+.PHONY: fix
 ## Fix front and back end lint errors
-fix:
-	./fix-lint.sh
+## @category Lint
+fix: fix-frontend fix-backend
 
+.PHONY: fix-backend
 ## Fix only backend lint errors
+## @category Lint
 fix-backend:
-	./fix-lint-backend.sh
+	./bin/fix-lint-backend.sh
 
+.PHONY: fix-frontend
 ## Fix only frontend lint errors
+## @category Lint
 fix-frontend:
-	./frontend/fix-lint.sh
+	bash -c "cd frontend && make fix"
 
+.PHONY: lint
 ## Lint front and back end
-lint:
-	./lint.sh
+## @category Lint
+lint: lint-frontend lint-backend
 
+.PHONY: lint-backend
 ## Lint the backend
+## @category Lint
 lint-backend:
-	./lint-backend.sh
+	./bin/lint-backend.sh
 
+.PHONY: lint-frontend
 ## Lint the frontend
+## @category Lint
 lint-frontend:
-	./frontend/lint.sh
+	bash -c "cd frontend && make lint"
 
+.PHONY: test
 ## Run Tests
+## @category Test
 test:
-	./test.sh
+	./bin/test.sh
 
+.PHONY: dev-server
 ## Run the dev webserver
+## @category Run
 dev-server:
-	./dev-server.sh
+	./bin/dev-server.sh
 
+.PHONY: dev-frontend
 ## Run the vite dev frontend
-dev-frontend:
-	frontend/dev-server.sh
+## @category Run
+dev-frontend-server:
+	bash -c "cd frontend && make dev-server"
 
+.PHONY: news
 ## Show recent NEWS
+## @category Deploy
 news:
 	head -40 NEWS.md
 
-.DEFAULT_GOAL := show-help
-# See <https://gist.github.com/klmr/575726c7e05d8780505a> for explanation.
-.PHONY: show-help
-show-help:
-	@echo "$$(tput bold)Available rules:$$(tput sgr0)";echo;sed -ne"/^## /{h;s/.*//;:d" -e"H;n;s/^## //;td" -e"s/:.*//;G;s/\\n## /---/;s/\\n/ /g;p;}" ${MAKEFILE_LIST}|LC_ALL='C' sort -f|awk -F --- -v n=$$(tput cols) -v i=19 -v a="$$(tput setaf 6)" -v z="$$(tput sgr0)" '{printf"%s%*s%s ",a,-i,$$1,z;m=split($$2,w," ");l=n-i;for(j=1;j<=m;j++){l-=length(w[j])+1;if(l<= 0){l=n-i-length(w[j])-1;printf"\n%*s ",-i," ";}printf"%s ",w[j];}printf"\n";}'|more $(shell test $(shell uname) == Darwin && echo '-Xr')
+.PHONY: all
+
+include bin/makefile-help.mk
