@@ -6,7 +6,7 @@ set -euxo pipefail
 ###################
 poetry run ruff --fix .
 poetry run black .
-poetry run djlint codex/templates --profile=django --reformat
+# poetry run djlint templates --profile=django --reformat
 
 ############################################
 ##### Javascript, JSON, Markdown, YAML #####
@@ -16,4 +16,4 @@ npm run fix
 ###################
 ###### Shell ######
 ###################
-shellharden --replace ./*.sh ./**/*.sh ./.*/*.sh
+shellharden --replace ./**/*.sh

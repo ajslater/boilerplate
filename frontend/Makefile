@@ -14,7 +14,7 @@ build: clean
 ## Remove static_build contents
 ## @category build
 clean:
-	rm -rf ../codex/static_build/*
+	rm -rf ../proj/static_build/*
 
 .PHONY: fix
 ## Fix only frontend lint errors
