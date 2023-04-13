@@ -1,7 +1,6 @@
 #!/bin/bash
 # Lint checks
 set -euxo pipefail
-cd "$(dirname "$0")"
 
 ####################
 ###### Python ######
