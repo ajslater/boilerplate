@@ -1,6 +1,12 @@
 #!/bin/bash
 # Fix common linting errors
 set -euxo pipefail
+
+################
+# Ignore files #
+################
+bin/sortignore.sh
+
 ####################
 ###### Python ######
 ###################
