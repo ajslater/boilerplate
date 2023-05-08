@@ -96,11 +96,14 @@ lint-backend:
 lint-frontend:
 	bash -c "cd frontend && make lint"
 
+## Test
+## @category Tests
+T :=
 .PHONY: test
 ## Run Tests
 ## @category Test
 test:
-	./bin/test.sh
+	./bin/test.sh $(T)
 
 .PHONY: dev-server
 ## Run the dev webserver
