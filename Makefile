@@ -1,21 +1,28 @@
+.PHONY: install-deps
+## Update pip and install poetry
+	pip install --upgrade pip
+	pip install --upgrade poetry
+
 .PHONY: install
 ## Install for production
 ## @category Install
-install:
-	pip install --update pip
-	poetry install --no-root
+install-prod: install-deps
+	poetry install --no-root --only-root
+	npm install
 
 .PHONY: install-dev
 ## Install dev requirements
 ## @category Install
-install-dev:
-	poetry install  --no-root --extras=dev
+install-dev: install-deps
+	poetry install --no-root --only-root --with dev
+	npm install
 
 .PHONY: install-all
-## Install all extras
+## Install with all extras
 ## @category Install
-install-all:
+install-all: install-deps
 	poetry install --no-root --all-extras
+	npm install
 
 .PHONY: clean
 ## Clean pycaches
@@ -47,7 +54,7 @@ update:
 update-builder:
 	./bin/update-builder-requirement.sh
 
-## version
+## Show version. Use V variable to set version
 ## @category Update
 V :=
 .PHONY: version
@@ -97,10 +104,10 @@ lint-frontend:
 	bash -c "cd frontend && make lint"
 
 ## Test
-## @category Tests
+## @category Test
 T :=
 .PHONY: test
-## Run Tests
+## Run Tests. Use T variable to run specific tests
 ## @category Test
 test:
 	./bin/test.sh $(T)
