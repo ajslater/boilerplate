@@ -11,6 +11,7 @@
 .picopt_timestamp
 .pytest_cache
 .ropeproject
+.ruff_cache
 .venv*
 MANIFEST
 NEWS
