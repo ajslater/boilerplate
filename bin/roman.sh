@@ -1,6 +1,7 @@
 #!/bin/bash
 # Find all shell scripts without a first line comment.
 # Created due to working with @defunctzombie
+set -euo pipefail
 
 # set options
 if [ "$1" = "-i" ]; then
@@ -13,7 +14,7 @@ fi
 if [ "$1" = "" ]; then
     echo "Usage: $0 [options] <path> [path...]"
     echo "Options:"
-    echo -e "\t-i <ignorefile>"
+    echo -e "\t-i <includefile>"
     exit 1
 fi
 
