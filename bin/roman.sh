@@ -21,7 +21,7 @@ fi
 # get files
 fns=$(find "$@" -type f -name "*.sh")
 if [ "$ignorefile" ]; then
-    fns=$(echo "$fns" | grep -v -f "$ignorefile")
+    fns=$(echo "$fns" | grep -vf "$ignorefile")
 fi
 
 # find nonconforming files
