@@ -1,7 +1,7 @@
 #!/bin/bash
 # Find all shell scripts without a first line comment.
 # Created due to working with @defunctzombie
-set -euo pipefail
+set -uo pipefail
 
 # set options
 if [ "$1" = "-i" ]; then
