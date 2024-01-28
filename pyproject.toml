@@ -26,7 +26,7 @@ exclude = ["*/**/*~"]
 include = []
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 
 [tool.poetry.group.dev.dependencies]
 neovim = "^0.3.1"
@@ -100,13 +100,12 @@ exclude = [
 useLibraryCodeForTypes = true
 reportMissingImports = true
 reportImportCycles = true
-pythonVersion = "3.9"
+pythonVersion = "3.10"
 pythonPlatform = "All"
 
 [tool.pytest.ini_options]
 junit_family = "xunit2"
 asyncio_mode = "strict"
-# --black
 addopts = """
     --junit-xml=test-results/pytest/results.xml
     -ra
@@ -177,7 +176,7 @@ extend-select = [
 external = ["V101"]
 # format = "grouped"
 # show-source = true
-target-version = "py39"
+target-version = "py310"
 task-tags = ["TODO", "FIXME", "XXX", "http", "HACK"]
 
 [tool.ruff.per-file-ignores]
