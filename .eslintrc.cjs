@@ -27,7 +27,7 @@ module.exports = {
     "prettier", // prettier-config
     // SECURITY
     "plugin:no-unsanitized/DOM",
-    "plugin:security/recommended",
+    "plugin:security/recommended-legacy",
   ],
   overrides: [
     {
@@ -91,6 +91,7 @@ module.exports = {
     ".git",
     "!.circleci",
     ".mypy_cache",
+    ".ruff_cache",
     ".pytest_cache",
     ".venv*",
     "dist",
