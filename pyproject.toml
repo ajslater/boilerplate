@@ -6,7 +6,7 @@ build-backend = "poetry.core.masonry.api"
 name = ""
 version = "0.1.0"
 description = ""
-license = "GPL-2.0-only"
+license = "GPL-3.0-only"
 authors = ["AJ Slater <aj@slater.net>"]
 readme = "README.md"
 homepage = "https://github.com/ajslater/"
@@ -55,9 +55,6 @@ vulture = "^2.3"
 "Docker Image" = "https://hub.docker.com/r/ajslater/"
 "Report Issues" = "https://github.com/ajslater/"
 
-[tool.black]
-
-#extend_exclude = "/()/"
 [tool.codespell]
 skip = './cache,./dist,./test-results,.git,.mypy_cache,.pytest_cache,.venv*,node_modules,package-lock.json,poetry.lock,run.spec'
 builtin = 'clear,rare,code'
