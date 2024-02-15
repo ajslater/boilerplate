@@ -103,8 +103,6 @@ pythonVersion = "3.10"
 pythonPlatform = "All"
 
 [tool.pytest.ini_options]
-junit_family = "xunit2"
-asyncio_mode = "strict"
 addopts = """
     --junit-xml=test-results/pytest/results.xml
     -ra
@@ -114,11 +112,9 @@ addopts = """
     --cov-append
     --cov-report=html
     --cov-report=term
-    --ignore=.git
-    --ignore=cache
-    --ignore=frontend
-    --ignore=typings
 """
+testpaths = "tests"
+junit_family = "xunit2"
 
 [tool.radon]
 exclude = "*~,.git/*,.mypy_cache/*,.pytest_cache/*,.venv*,__pycache__/*,cache/*,dist/*,node_modules/*,test-results/*,typings/*"
@@ -208,7 +204,7 @@ exclude = [
   "*/__pycache__",
   "dist/",
   "node_modules/",
-  "test_results/",
+  "test-results/",
   "typings/",
 ]
 min_confidence = 61
