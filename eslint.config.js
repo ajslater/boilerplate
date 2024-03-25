@@ -1,11 +1,13 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 import arrayFunc from "eslint-plugin-array-func";
+import markdown from "eslint-plugin-markdown";
 // import plugin broken for flag config
 // https://github.com/import-js/eslint-plugin-import/issues/2556
 // import importPlugin from "eslint-plugin-import";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import pluginSecurity from "eslint-plugin-security";
+import eslintPluginToml from "eslint-plugin-toml";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import globals from "globals";
 
@@ -23,7 +25,10 @@ export default [
       reportUnusedDisableDirectives: "warn",
     },
     plugins: {
+      markdown: markdown,
       // import: importPlugin,
+      security: pluginSecurity,
+      toml: eslintPluginToml,
       unicorn: eslintPluginUnicorn,
     },
     rules: {
@@ -67,6 +72,8 @@ export default [
     },
      */
   },
+  ...markdown.configs.recommended,
+  ...eslintPluginToml.configs["flat/recommended"],
   js.configs.recommended,
   arrayFunc.configs.all,
   pluginSecurity.configs.recommended,
@@ -81,8 +88,6 @@ export default [
     extends: [
       // LANGS
       "plugin:jsonc/recommended-with-jsonc",
-      "plugin:markdown/recommended",
-      "plugin:toml/recommended",
       "plugin:yml/standard",
       "plugin:yml/prettier",
       // CODE QUALITY
@@ -146,7 +151,6 @@ export default [
     plugins: [
       "eslint-comments",
       //"import",
-      "markdown",
       "no-constructor-bind",
       "no-secrets",
       "no-unsanitized",
