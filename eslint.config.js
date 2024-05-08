@@ -1,18 +1,17 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
-import arrayFunc from "eslint-plugin-array-func";
+import eslintPluginArrayFunc from "eslint-plugin-array-func";
 // import plugin broken for flag config
-// https://github.com/import-js/eslint-plugin-import/issues/2556
 // import importPlugin from "eslint-plugin-import";
 import eslintPluginJsonc from "eslint-plugin-jsonc";
-import markdown from "eslint-plugin-markdown";
-import prettier from "eslint-plugin-prettier";
+import eslintPluginMarkdown from "eslint-plugin-markdown";
+import eslintPuginPrettier from "eslint-plugin-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import eslintPluginSecurity from "eslint-plugin-security";
-import simpleImportSort from "eslint-plugin-simple-import-sort";
-import sonarjs from "eslint-plugin-sonarjs";
+import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
+import eslintPluginSonarjs from "eslint-plugin-sonarjs";
 import eslintPluginToml from "eslint-plugin-toml";
-import unicorn from "eslint-plugin-unicorn";
+import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import eslintPluginYml from "eslint-plugin-yml";
 import globals from "globals";
 
@@ -30,15 +29,16 @@ export default [
       reportUnusedDisableDirectives: "warn",
     },
     plugins: {
-      arrayFunc,
+      arrayFunc: eslintPluginArrayFunc,
       // import: importPlugin,
-      markdown,
-      prettier,
+      jsonc: eslintPluginJsonc,
+      markdown: eslintPluginMarkdown,
+      prettier: eslintPuginPrettier,
       security: eslintPluginSecurity,
-      // sonarjs,
-      "simple-import-sort": simpleImportSort,
+      // sonarjs: eslintPluginSonarjs,
+      "simple-import-sort": eslintPluginSimpleImportSort,
       toml: eslintPluginToml,
-      unicorn,
+      unicorn: eslintPluginUnicorn,
       yml: eslintPluginYml,
     },
     rules: {
@@ -100,12 +100,12 @@ export default [
     ],
   },
   js.configs.recommended,
-  arrayFunc.configs.all,
+  eslintPluginArrayFunc.configs.all,
   ...eslintPluginJsonc.configs["flat/recommended-with-jsonc"],
-  ...markdown.configs.recommended,
+  ...eslintPluginMarkdown.configs.recommended,
   eslintPluginPrettierRecommended,
   eslintPluginSecurity.configs.recommended,
-  sonarjs.configs.recommended,
+  eslintPluginSonarjs.configs.recommended,
   ...eslintPluginToml.configs["flat/recommended"],
   ...eslintPluginYml.configs["flat/standard"],
   ...eslintPluginYml.configs["flat/prettier"],
@@ -139,7 +139,7 @@ export default [
       //"plugin:promise/recommended",
       "plugin:switch-case/recommended",
       // SECURITY
-      //"plugin:no-unsanitized/DOM",
+      //"plugin:no-unsanitized/DOM", // https://github.com/mozilla/eslint-plugin-no-unsanitized/issues/234
     ],
     parserOptions: {
       ecmaFeatures: {
@@ -148,21 +148,20 @@ export default [
       ecmaVersion: "latest",
     },
     plugins: [
-      "eslint-comments",
-      //"import",
-      "no-constructor-bind",
-      "no-secrets",
-      "no-use-extend-native",
-      "optimize-regex",
-      //"promise",
-      "switch-case",
+      "eslint-comments", // https://github.com/mysticatea/eslint-plugin-eslint-comments/issues/79
+      // "import", // https://github.com/import-js/eslint-plugin-import/issues/2556
+      "no-constructor-bind", // https://github.com/markalfred/eslint-plugin-no-constructor-bind
+      "no-secrets", // https://github.com/nickdeis/eslint-plugin-no-secrets/issues/26
+      "no-use-extend-native", // https://github.com/dustinspecker/eslint-plugin-no-use-extend-native/issues/136
+      "optimize-regex", // https://github.com/BrainMaestro/eslint-plugin-optimize-regex
+      // "promise", // https://github.com/eslint-community/eslint-plugin-promise/issues/449
+      "switch-case", // https://github.com/lukeapage/eslint-plugin-switch-case
     ],
     rules: {
       "no-constructor-bind/no-constructor-bind": "error",
       "no-constructor-bind/no-constructor-state": "error",
       "no-secrets/no-secrets": "error",
       "eslint-comments/no-unused-disable": 1,
-      "switch-case/newline-between-switch-case": "off", // Malfunctioning
     },
     ignorePatterns: [
       "*~",
