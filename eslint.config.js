@@ -123,6 +123,12 @@ export default [
     },
   },
   {
+    files: ["**/*.md/*.sh"],
+    rules: {
+      "prettier/prettier": ["error", { parser: "sh" }],
+    },
+  },
+  {
     files: ["docker-compose*.yaml"],
     rules: {
       "yml/no-empty-mapping-value": "off",
