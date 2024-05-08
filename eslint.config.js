@@ -15,6 +15,23 @@ import globals from "globals";
 
 const compat = new FlatCompat();
 
+const ignores = [
+  "!.circleci",
+  "**/__pycache__",
+  "*test-results*",
+  "*~",
+  ".git",
+  ".mypy_cache",
+  ".pytest_cache",
+  ".ruff_cache",
+  ".venv",
+  "dist",
+  "node_modules",
+  "package-lock.json",
+  "poetry.lock",
+  "typings",
+];
+
 export default [
   {
     languageOptions: {
@@ -32,8 +49,8 @@ export default [
       markdown: eslintPluginMarkdown,
       prettier: eslintPluginPrettier,
       security: eslintPluginSecurity,
-      // sonarjs: eslintPluginSonarjs,
       "simple-import-sort": eslintPluginSimpleImportSort,
+      // sonarjs: eslintPluginSonarjs,
       toml: eslintPluginToml,
       unicorn: eslintPluginUnicorn,
       yml: eslintPluginYml,
@@ -47,8 +64,8 @@ export default [
       "no-constructor-bind/no-constructor-state": "error",
       "prettier/prettier": "warn",
       "security/detect-object-injection": "off",
-      "simple-import-sort/imports": "warn",
       "simple-import-sort/exports": "warn",
+      "simple-import-sort/imports": "warn",
       "space-before-function-paren": "off",
       "unicorn/switch-case-braces": ["warn", "avoid"],
       "unicorn/prefer-node-protocol": 0,
@@ -79,22 +96,7 @@ export default [
       },
     },
      */
-    ignores: [
-      "!.circleci",
-      "**/__pycache__",
-      "*test-results*",
-      "*~",
-      ".git",
-      ".mypy_cache",
-      ".pytest_cache",
-      ".ruff_cache",
-      ".venv",
-      "dist",
-      "node_modules",
-      "package-lock.json",
-      "poetry.lock",
-      "typings",
-    ],
+    ignores,
   },
   js.configs.recommended,
   eslintPluginArrayFunc.configs.all,
@@ -160,21 +162,6 @@ export default [
       "no-secrets/no-secrets": "error",
       "eslint-comments/no-unused-disable": 1,
     },
-    ignorePatterns: [
-      "*~",
-      "**/__pycache__",
-      ".git",
-      "!.circleci",
-      ".mypy_cache",
-      ".ruff_cache",
-      ".pytest_cache",
-      ".venv*",
-      "dist",
-      "node_modules",
-      "package-lock.json",
-      "poetry.lock",
-      "test-results",
-      "typings",
-    ],
+    ignorePatterns: ignores,
   }),
 ];
