@@ -82,6 +82,22 @@ export default [
       },
     },
      */
+    ignores: [
+      "!.circleci",
+      "**/__pycache__",
+      "*test-results*",
+      "*~",
+      ".git",
+      ".mypy_cache",
+      ".pytest_cache",
+      ".ruff_cache",
+      ".venv",
+      "dist",
+      "node_modules",
+      "package-lock.json",
+      "poetry.lock",
+      "typings",
+    ],
   },
   js.configs.recommended,
   arrayFunc.configs.all,
@@ -120,10 +136,10 @@ export default [
       // "plugin:import/recommended",
       "plugin:no-use-extend-native/recommended",
       "plugin:optimize-regex/all",
-      "plugin:promise/recommended",
+      //"plugin:promise/recommended",
       "plugin:switch-case/recommended",
       // SECURITY
-      "plugin:no-unsanitized/DOM",
+      //"plugin:no-unsanitized/DOM",
     ],
     parserOptions: {
       ecmaFeatures: {
@@ -136,10 +152,9 @@ export default [
       //"import",
       "no-constructor-bind",
       "no-secrets",
-      "no-unsanitized",
       "no-use-extend-native",
       "optimize-regex",
-      "promise",
+      //"promise",
       "switch-case",
     ],
     rules: {
