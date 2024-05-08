@@ -122,6 +122,12 @@ export default [
       "no-undef": "off",
     },
   },
+  {
+    files: ["docker-compose*.yaml"],
+    rules: {
+      "yml/no-empty-mapping-value": "off",
+    },
+  },
   ...compat.config({
     root: true,
     env: {
