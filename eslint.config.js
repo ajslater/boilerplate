@@ -1,8 +1,6 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
-// import plugin broken for flag config
-// import importPlugin from "eslint-plugin-import";
 import eslintPluginJsonc from "eslint-plugin-jsonc";
 import eslintPluginMarkdown from "eslint-plugin-markdown";
 import eslintPuginPrettier from "eslint-plugin-prettier";
