@@ -28,7 +28,6 @@ export default [
     },
     plugins: {
       arrayFunc: eslintPluginArrayFunc,
-      // import: importPlugin,
       jsonc: eslintPluginJsonc,
       markdown: eslintPluginMarkdown,
       prettier: eslintPluginPrettier,
