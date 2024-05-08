@@ -3,7 +3,7 @@ import js from "@eslint/js";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
 import eslintPluginJsonc from "eslint-plugin-jsonc";
 import eslintPluginMarkdown from "eslint-plugin-markdown";
-import eslintPuginPrettier from "eslint-plugin-prettier";
+import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import eslintPluginSecurity from "eslint-plugin-security";
 import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
@@ -31,7 +31,7 @@ export default [
       // import: importPlugin,
       jsonc: eslintPluginJsonc,
       markdown: eslintPluginMarkdown,
-      prettier: eslintPuginPrettier,
+      prettier: eslintPluginPrettier,
       security: eslintPluginSecurity,
       // sonarjs: eslintPluginSonarjs,
       "simple-import-sort": eslintPluginSimpleImportSort,
