@@ -3,6 +3,7 @@ import js from "@eslint/js";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
 import eslintPluginJsonc from "eslint-plugin-jsonc";
 import eslintPluginMarkdown from "eslint-plugin-markdown";
+import eslintPluginNoSecrets from "eslint-plugin-no-secrets";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import eslintPluginSecurity from "eslint-plugin-security";
@@ -47,6 +48,7 @@ export default [
       arrayFunc: eslintPluginArrayFunc,
       jsonc: eslintPluginJsonc,
       markdown: eslintPluginMarkdown,
+      "no-secrets": eslintPluginNoSecrets,
       prettier: eslintPluginPrettier,
       security: eslintPluginSecurity,
       "simple-import-sort": eslintPluginSimpleImportSort,
@@ -62,6 +64,7 @@ export default [
       "no-debugger": "warn",
       "no-constructor-bind/no-constructor-bind": "error",
       "no-constructor-bind/no-constructor-state": "error",
+      "no-secrets/no-secrets": "error",
       "prettier/prettier": "warn",
       "security/detect-object-injection": "off",
       "simple-import-sort/exports": "warn",
@@ -162,7 +165,6 @@ export default [
       "eslint-comments", // https://github.com/mysticatea/eslint-plugin-eslint-comments/issues/79
       // "import", // https://github.com/import-js/eslint-plugin-import/issues/2556
       "no-constructor-bind", // https://github.com/markalfred/eslint-plugin-no-constructor-bind
-      "no-secrets", // https://github.com/nickdeis/eslint-plugin-no-secrets/issues/26
       "no-use-extend-native", // https://github.com/dustinspecker/eslint-plugin-no-use-extend-native/issues/136
       "optimize-regex", // https://github.com/BrainMaestro/eslint-plugin-optimize-regex
       // "promise", // https://github.com/eslint-community/eslint-plugin-promise/issues/449
@@ -171,7 +173,6 @@ export default [
     rules: {
       "no-constructor-bind/no-constructor-bind": "error",
       "no-constructor-bind/no-constructor-state": "error",
-      "no-secrets/no-secrets": "error",
       "eslint-comments/no-unused-disable": 1,
     },
     ignorePatterns: ignores,
