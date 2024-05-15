@@ -19,7 +19,6 @@ const compat = new FlatCompat();
 const ignores = [
   "!.circleci",
   "**/__pycache__",
-  "*test-results*",
   "*~",
   ".git",
   ".mypy_cache",
@@ -30,6 +29,7 @@ const ignores = [
   "node_modules",
   "package-lock.json",
   "poetry.lock",
+  "test-results",
   "typings",
 ];
 
@@ -150,10 +150,10 @@ export default [
       // "plugin:import/recommended",
       "plugin:no-use-extend-native/recommended",
       "plugin:optimize-regex/all",
-      //"plugin:promise/recommended",
+      // "plugin:promise/recommended",
       "plugin:switch-case/recommended",
       // SECURITY
-      //"plugin:no-unsanitized/DOM", // https://github.com/mozilla/eslint-plugin-no-unsanitized/issues/234
+      // "plugin:no-unsanitized/DOM", // https://github.com/mozilla/eslint-plugin-no-unsanitized/issues/234
     ],
     parserOptions: {
       ecmaFeatures: {
@@ -174,6 +174,7 @@ export default [
       "no-constructor-bind/no-constructor-bind": "error",
       "no-constructor-bind/no-constructor-state": "error",
       "eslint-comments/no-unused-disable": 1,
+      "switch-case/newline-between-switch-case": "off", // Malfunctioning
     },
     ignorePatterns: ignores,
   }),
