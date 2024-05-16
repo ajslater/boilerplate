@@ -19,6 +19,8 @@ const compat = new FlatCompat();
 const ignores = [
   "!.circleci",
   "**/__pycache__",
+  "**/*min.css",
+  "**/*min.js",
   "*~",
   ".git",
   ".mypy_cache",
@@ -31,7 +33,6 @@ const ignores = [
   "poetry.lock",
   "test-results",
   "typings",
-  "**/*min.js",
 ];
 
 export default [
