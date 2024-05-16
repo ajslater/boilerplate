@@ -31,6 +31,7 @@ const ignores = [
   "poetry.lock",
   "test-results",
   "typings",
+  "**/*min.js",
 ];
 
 export default [
