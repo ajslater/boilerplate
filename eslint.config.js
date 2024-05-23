@@ -4,6 +4,7 @@ import eslintPluginArrayFunc from "eslint-plugin-array-func";
 import eslintPluginJsonc from "eslint-plugin-jsonc";
 import eslintPluginMarkdown from "eslint-plugin-markdown";
 import eslintPluginNoSecrets from "eslint-plugin-no-secrets";
+import eslintPluginNoUseExtendNative from "eslint-plugin-no-use-extend-native";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import eslintPluginSecurity from "eslint-plugin-security";
@@ -51,6 +52,7 @@ export default [
       jsonc: eslintPluginJsonc,
       markdown: eslintPluginMarkdown,
       "no-secrets": eslintPluginNoSecrets,
+      "no-use-extend-native": eslintPluginNoUseExtendNative,
       prettier: eslintPluginPrettier,
       security: eslintPluginSecurity,
       "simple-import-sort": eslintPluginSimpleImportSort,
@@ -107,6 +109,7 @@ export default [
   eslintPluginArrayFunc.configs.all,
   ...eslintPluginJsonc.configs["flat/recommended-with-jsonc"],
   ...eslintPluginMarkdown.configs.recommended,
+  eslintPluginNoUseExtendNative.configs.recommended,
   eslintPluginPrettierRecommended,
   eslintPluginSecurity.configs.recommended,
   eslintPluginSonarjs.configs.recommended,
@@ -150,7 +153,6 @@ export default [
       // PRACTICES
       "plugin:eslint-comments/recommended",
       // "plugin:import/recommended",
-      "plugin:no-use-extend-native/recommended",
       "plugin:optimize-regex/all",
       // "plugin:promise/recommended",
       "plugin:switch-case/recommended",
@@ -167,7 +169,6 @@ export default [
       "eslint-comments", // https://github.com/mysticatea/eslint-plugin-eslint-comments/issues/79
       // "import", // https://github.com/import-js/eslint-plugin-import/issues/2556
       "no-constructor-bind", // https://github.com/markalfred/eslint-plugin-no-constructor-bind
-      "no-use-extend-native", // https://github.com/dustinspecker/eslint-plugin-no-use-extend-native/issues/136
       "optimize-regex", // https://github.com/BrainMaestro/eslint-plugin-optimize-regex
       // "promise", // https://github.com/eslint-community/eslint-plugin-promise/issues/449
       "switch-case", // https://github.com/lukeapage/eslint-plugin-switch-case
