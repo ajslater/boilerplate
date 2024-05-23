@@ -158,7 +158,7 @@ export default [
       "plugin:eslint-comments/recommended",
       // "plugin:import/recommended",
       "plugin:optimize-regex/all",
-      "plugin:promise/recommended",
+      // "plugin:promise/recommended",
       "plugin:switch-case/recommended",
       // SECURITY
     ],
@@ -173,7 +173,7 @@ export default [
       // "import", // https://github.com/import-js/eslint-plugin-import/issues/2556
       "no-constructor-bind", // https://github.com/markalfred/eslint-plugin-no-constructor-bind
       "optimize-regex", // https://github.com/BrainMaestro/eslint-plugin-optimize-regex
-      "promise", // https://github.com/eslint-community/eslint-plugin-promise/issues/449
+      // "promise", // https://github.com/eslint-community/eslint-plugin-promise/issues/449
       "switch-case", // https://github.com/lukeapage/eslint-plugin-switch-case
     ],
     rules: {
