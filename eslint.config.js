@@ -1,9 +1,11 @@
+import { fixupConfigRules } from "@eslint/compat";
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
 import eslintPluginJsonc from "eslint-plugin-jsonc";
 import eslintPluginMarkdown from "eslint-plugin-markdown";
 import eslintPluginNoSecrets from "eslint-plugin-no-secrets";
+// import eslintPluginNoUnsanitized from "eslint-plugin-no-unsanitized";
 import eslintPluginNoUseExtendNative from "eslint-plugin-no-use-extend-native";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
@@ -53,6 +55,7 @@ export default [
       markdown: eslintPluginMarkdown,
       "no-secrets": eslintPluginNoSecrets,
       "no-use-extend-native": eslintPluginNoUseExtendNative,
+      // "no-unsantized": eslintPluginNoUnsanitized,
       prettier: eslintPluginPrettier,
       security: eslintPluginSecurity,
       "simple-import-sort": eslintPluginSimpleImportSort,
@@ -110,6 +113,7 @@ export default [
   ...eslintPluginJsonc.configs["flat/recommended-with-jsonc"],
   ...eslintPluginMarkdown.configs.recommended,
   eslintPluginNoUseExtendNative.configs.recommended,
+  // eslintPluginNoUnsanitized.configs.recommended,
   eslintPluginPrettierRecommended,
   eslintPluginSecurity.configs.recommended,
   eslintPluginSonarjs.configs.recommended,
@@ -154,10 +158,9 @@ export default [
       "plugin:eslint-comments/recommended",
       // "plugin:import/recommended",
       "plugin:optimize-regex/all",
-      // "plugin:promise/recommended",
+      "plugin:promise/recommended",
       "plugin:switch-case/recommended",
       // SECURITY
-      // "plugin:no-unsanitized/DOM", // https://github.com/mozilla/eslint-plugin-no-unsanitized/issues/234
     ],
     parserOptions: {
       ecmaFeatures: {
@@ -170,7 +173,7 @@ export default [
       // "import", // https://github.com/import-js/eslint-plugin-import/issues/2556
       "no-constructor-bind", // https://github.com/markalfred/eslint-plugin-no-constructor-bind
       "optimize-regex", // https://github.com/BrainMaestro/eslint-plugin-optimize-regex
-      // "promise", // https://github.com/eslint-community/eslint-plugin-promise/issues/449
+      "promise", // https://github.com/eslint-community/eslint-plugin-promise/issues/449
       "switch-case", // https://github.com/lukeapage/eslint-plugin-switch-case
     ],
     rules: {
