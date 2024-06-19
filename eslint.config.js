@@ -1,5 +1,6 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
+import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
 import eslintPluginJsonc from "eslint-plugin-jsonc";
 import eslintPluginMarkdown from "eslint-plugin-markdown";
@@ -114,13 +115,14 @@ export default [
   ...eslintPluginMarkdown.configs.recommended,
   eslintPluginNoUseExtendNative.configs.recommended,
   // eslintPluginNoUnsanitized.configs.recommended,
-  eslintPluginPrettierRecommended,
   eslintPluginRegexp.configs["flat/recommended"],
   eslintPluginSecurity.configs.recommended,
   eslintPluginSonarjs.configs.recommended,
   ...eslintPluginToml.configs["flat/recommended"],
   ...eslintPluginYml.configs["flat/standard"],
   ...eslintPluginYml.configs["flat/prettier"],
+  eslintPluginPrettierRecommended,
+  eslintConfigPrettier, // Best if last
   {
     files: ["**/*.md"],
     processor: "markdown/markdown",
