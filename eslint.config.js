@@ -8,6 +8,7 @@ import eslintPluginNoSecrets from "eslint-plugin-no-secrets";
 import eslintPluginNoUseExtendNative from "eslint-plugin-no-use-extend-native";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import eslintPluginRegexp from "eslint-plugin-regexp";
 import eslintPluginSecurity from "eslint-plugin-security";
 import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
 import eslintPluginSonarjs from "eslint-plugin-sonarjs";
@@ -114,6 +115,7 @@ export default [
   eslintPluginNoUseExtendNative.configs.recommended,
   // eslintPluginNoUnsanitized.configs.recommended,
   eslintPluginPrettierRecommended,
+  eslintPluginRegexp.configs["flat/recommended"],
   eslintPluginSecurity.configs.recommended,
   eslintPluginSonarjs.configs.recommended,
   ...eslintPluginToml.configs["flat/recommended"],
@@ -154,12 +156,8 @@ export default [
     },
     extends: [
       // PRACTICES
-      "plugin:eslint-comments/recommended",
       // "plugin:import/recommended",
-      "plugin:optimize-regex/all",
       // "plugin:promise/recommended",
-      "plugin:switch-case/recommended",
-      // SECURITY
     ],
     parserOptions: {
       ecmaFeatures: {
@@ -168,18 +166,13 @@ export default [
       ecmaVersion: "latest",
     },
     plugins: [
-      "eslint-comments", // https://github.com/mysticatea/eslint-plugin-eslint-comments/issues/79
       // "import", // https://github.com/import-js/eslint-plugin-import/issues/2556
       "no-constructor-bind", // https://github.com/markalfred/eslint-plugin-no-constructor-bind
-      "optimize-regex", // https://github.com/BrainMaestro/eslint-plugin-optimize-regex
       // "promise", // https://github.com/eslint-community/eslint-plugin-promise/issues/449
-      "switch-case", // https://github.com/lukeapage/eslint-plugin-switch-case
     ],
     rules: {
       "no-constructor-bind/no-constructor-bind": "error",
       "no-constructor-bind/no-constructor-state": "error",
-      "eslint-comments/no-unused-disable": 1,
-      "switch-case/newline-between-switch-case": "off", // Malfunctioning
     },
     ignorePatterns: ignores,
   }),
