@@ -42,24 +42,6 @@ const IGNORES = [
 Object.freeze(IGNORES);
 const FLAT_RECOMMENDED = "flat/recommended";
 Object.freeze(FLAT_RECOMMENDED);
-const SECURITY_RULES = {
-  // Adding recommended and then turning off rules does not work.
-  "security/detect-buffer-noassert": "warn",
-  "security/detect-child-process": "warn",
-  "security/detect-disable-mustache-escape": "warn",
-  "security/detect-eval-with-expression": "warn",
-  "security/detect-new-buffer": "warn",
-  "security/detect-no-csrf-before-method-override": "warn",
-  "security/detect-non-literal-fs-filename": "warn",
-  "security/detect-non-literal-regexp": "warn",
-  "security/detect-non-literal-require": "warn",
-  //'security/detect-object-injection': 'warn',
-  "security/detect-possible-timing-attacks": "warn",
-  "security/detect-pseudoRandomBytes": "warn",
-  "security/detect-unsafe-regex": "warn",
-  "security/detect-bidi-characters": "warn",
-};
-Object.freeze(SECURITY_RULES);
 
 export default [
   js.configs.recommended,
@@ -117,7 +99,7 @@ export default [
       "simple-import-sort/imports": "warn",
       "space-before-function-paren": "off",
       "unicorn/switch-case-braces": ["warn", "avoid"],
-      "unicorn/prefer-node-protocol": 0,
+      "unicorn/prefer-node-protocol": "off",
       "unicorn/prevent-abbreviations": "off",
       "unicorn/filename-case": [
         "error",
@@ -153,6 +135,12 @@ export default [
     files: ["**/*.md/*.sh"],
     rules: {
       "prettier/prettier": ["error", { parser: "sh" }],
+    },
+  },
+  {
+    files: ["**/*.toml"],
+    rules: {
+      "prettier/prettier": ["error", { parser: "toml" }],
     },
   },
   {
