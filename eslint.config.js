@@ -9,6 +9,7 @@ import eslintPluginNoSecrets from "eslint-plugin-no-secrets";
 // import eslintPluginNoUseExtendNative from "eslint-plugin-no-use-extend-native";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import eslintPluginPromise from "eslint-plugin-promise";
 import eslintPluginRegexp from "eslint-plugin-regexp";
 import eslintPluginSecurity from "eslint-plugin-security";
 import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
@@ -20,7 +21,7 @@ import globals from "globals";
 
 const compat = new FlatCompat();
 
-const ignores = [
+const IGNORES = [
   "!.circleci",
   "**/__pycache__",
   "**/*min.css",
@@ -38,8 +39,44 @@ const ignores = [
   "test-results",
   "typings",
 ];
+Object.freeze(IGNORES);
+const FLAT_RECOMMENDED = "flat/recommended";
+Object.freeze(FLAT_RECOMMENDED);
+const SECURITY_RULES = {
+  // Adding recommended and then turning off rules does not work.
+  "security/detect-buffer-noassert": "warn",
+  "security/detect-child-process": "warn",
+  "security/detect-disable-mustache-escape": "warn",
+  "security/detect-eval-with-expression": "warn",
+  "security/detect-new-buffer": "warn",
+  "security/detect-no-csrf-before-method-override": "warn",
+  "security/detect-non-literal-fs-filename": "warn",
+  "security/detect-non-literal-regexp": "warn",
+  "security/detect-non-literal-require": "warn",
+  //'security/detect-object-injection': 'warn',
+  "security/detect-possible-timing-attacks": "warn",
+  "security/detect-pseudoRandomBytes": "warn",
+  "security/detect-unsafe-regex": "warn",
+  "security/detect-bidi-characters": "warn",
+};
+Object.freeze(SECURITY_RULES);
 
 export default [
+  js.configs.recommended,
+  eslintPluginArrayFunc.configs.all,
+  ...eslintPluginJsonc.configs["flat/recommended-with-jsonc"],
+  ...eslintPluginMarkdown.configs.recommended,
+  // eslintPluginNoUseExtendNative.configs.recommended,
+  // eslintPluginNoUnsanitized.configs.recommended,
+  eslintPluginPrettierRecommended,
+  eslintPluginPromise.configs[FLAT_RECOMMENDED],
+  eslintPluginRegexp.configs[FLAT_RECOMMENDED],
+  eslintPluginSecurity.configs.recommended,
+  eslintPluginSonarjs.configs.recommended,
+  ...eslintPluginToml.configs[FLAT_RECOMMENDED],
+  ...eslintPluginYml.configs["flat/standard"],
+  ...eslintPluginYml.configs["flat/prettier"],
+  eslintConfigPrettier, // Best if last
   {
     languageOptions: {
       globals: {
@@ -58,6 +95,7 @@ export default [
       // "no-use-extend-native": eslintPluginNoUseExtendNative,
       // "no-unsantized": eslintPluginNoUnsanitized,
       prettier: eslintPluginPrettier,
+      promise: eslintPluginPromise,
       security: eslintPluginSecurity,
       "simple-import-sort": eslintPluginSimpleImportSort,
       // sonarjs: eslintPluginSonarjs,
@@ -95,34 +133,8 @@ export default [
      ],
      */
     },
-    /*
-    settings: {
-      "import/parsers": {
-        espree: [".js", ".cjs", ".mjs", ".jsx"],
-        "@typescript-eslint/parser": [".ts"],
-      },
-      "import/resolver": {
-        typescript: true, 
-        node: true,
-      },
-    },
-     */
-    ignores,
+    ignores: IGNORES,
   },
-  js.configs.recommended,
-  eslintPluginArrayFunc.configs.all,
-  ...eslintPluginJsonc.configs["flat/recommended-with-jsonc"],
-  ...eslintPluginMarkdown.configs.recommended,
-  // eslintPluginNoUseExtendNative.configs.recommended,
-  // eslintPluginNoUnsanitized.configs.recommended,
-  eslintPluginRegexp.configs["flat/recommended"],
-  eslintPluginSecurity.configs.recommended,
-  eslintPluginSonarjs.configs.recommended,
-  ...eslintPluginToml.configs["flat/recommended"],
-  ...eslintPluginYml.configs["flat/standard"],
-  ...eslintPluginYml.configs["flat/prettier"],
-  eslintPluginPrettierRecommended,
-  eslintConfigPrettier, // Best if last
   {
     files: ["**/*.md"],
     processor: "markdown/markdown",
@@ -159,7 +171,6 @@ export default [
     extends: [
       // PRACTICES
       // "plugin:import/recommended",
-      // "plugin:promise/recommended",
     ],
     parserOptions: {
       ecmaFeatures: {
@@ -170,12 +181,11 @@ export default [
     plugins: [
       // "import", // https://github.com/import-js/eslint-plugin-import/issues/2556
       "no-constructor-bind", // https://github.com/markalfred/eslint-plugin-no-constructor-bind
-      // "promise", // https://github.com/eslint-community/eslint-plugin-promise/issues/449
     ],
     rules: {
       "no-constructor-bind/no-constructor-bind": "error",
       "no-constructor-bind/no-constructor-state": "error",
     },
-    ignorePatterns: ignores,
+    ignorePatterns: IGNORES,
   }),
 ];
