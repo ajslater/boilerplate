@@ -1,4 +1,3 @@
-import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
@@ -6,7 +5,8 @@ import eslintPluginJsonc from "eslint-plugin-jsonc";
 import eslintPluginMarkdown from "eslint-plugin-markdown";
 import eslintPluginNoSecrets from "eslint-plugin-no-secrets";
 // import eslintPluginNoUnsanitized from "eslint-plugin-no-unsanitized";
-// import eslintPluginNoUseExtendNative from "eslint-plugin-no-use-extend-native";
+// https://github.com/mozilla/eslint-plugin-no-unsanitized/issues/241
+import eslintPluginNoUseExtendNative from "eslint-plugin-no-use-extend-native";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import eslintPluginPromise from "eslint-plugin-promise";
@@ -19,36 +19,34 @@ import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import eslintPluginYml from "eslint-plugin-yml";
 import globals from "globals";
 
-const compat = new FlatCompat();
-
-const IGNORES = [
-  "!.circleci",
-  "**/__pycache__",
-  "**/*min.css",
-  "**/*min.js",
-  "*~",
-  ".git",
-  ".mypy_cache",
-  ".pytest_cache",
-  ".ruff_cache",
-  ".venv",
-  "dist",
-  "node_modules",
-  "package-lock.json",
-  "poetry.lock",
-  "test-results",
-  "typings",
-];
-Object.freeze(IGNORES);
 const FLAT_RECOMMENDED = "flat/recommended";
-Object.freeze(FLAT_RECOMMENDED);
 
 export default [
+  {
+    ignores: [
+      "!.circleci",
+      "**/__pycache__",
+      "**/*min.css",
+      "**/*min.js",
+      "*~",
+      ".git/",
+      ".mypy_cache/",
+      ".pytest_cache/",
+      ".ruff_cache/",
+      ".venv/",
+      "dist/",
+      "node_modules/",
+      "package-lock.json",
+      "poetry.lock",
+      "test-results/",
+      "typings/",
+    ],
+  },
   js.configs.recommended,
   eslintPluginArrayFunc.configs.all,
   ...eslintPluginJsonc.configs["flat/recommended-with-jsonc"],
   ...eslintPluginMarkdown.configs.recommended,
-  // eslintPluginNoUseExtendNative.configs.recommended,
+  eslintPluginNoUseExtendNative.configs.recommended,
   // eslintPluginNoUnsanitized.configs.recommended,
   eslintPluginPrettierRecommended,
   eslintPluginPromise.configs[FLAT_RECOMMENDED],
@@ -74,7 +72,7 @@ export default [
       jsonc: eslintPluginJsonc,
       markdown: eslintPluginMarkdown,
       "no-secrets": eslintPluginNoSecrets,
-      // "no-use-extend-native": eslintPluginNoUseExtendNative,
+      "no-use-extend-native": eslintPluginNoUseExtendNative,
       // "no-unsantized": eslintPluginNoUnsanitized,
       prettier: eslintPluginPrettier,
       promise: eslintPluginPromise,
@@ -90,8 +88,6 @@ export default [
       "max-params": ["warn", 4],
       "no-console": "warn",
       "no-debugger": "warn",
-      "no-constructor-bind/no-constructor-bind": "error",
-      "no-constructor-bind/no-constructor-state": "error",
       "no-secrets/no-secrets": "error",
       "prettier/prettier": "warn",
       "security/detect-object-injection": "off",
@@ -115,7 +111,6 @@ export default [
      ],
      */
     },
-    ignores: IGNORES,
   },
   {
     files: ["**/*.md"],
@@ -149,31 +144,4 @@ export default [
       "yml/no-empty-mapping-value": "off",
     },
   },
-  ...compat.config({
-    root: true,
-    env: {
-      browser: true,
-      es2024: true,
-      node: true,
-    },
-    extends: [
-      // PRACTICES
-      // "plugin:import/recommended",
-    ],
-    parserOptions: {
-      ecmaFeatures: {
-        impliedStrict: true,
-      },
-      ecmaVersion: "latest",
-    },
-    plugins: [
-      // "import", // https://github.com/import-js/eslint-plugin-import/issues/2556
-      "no-constructor-bind", // https://github.com/markalfred/eslint-plugin-no-constructor-bind
-    ],
-    rules: {
-      "no-constructor-bind/no-constructor-bind": "error",
-      "no-constructor-bind/no-constructor-state": "error",
-    },
-    ignorePatterns: IGNORES,
-  }),
 ];
