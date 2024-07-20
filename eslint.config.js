@@ -1,12 +1,15 @@
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
+import eslintPluginCompat from "eslint-plugin-compat";
+import eslintPluginDepend from "eslint-plugin-depend";
 import eslintPluginJsonc from "eslint-plugin-jsonc";
 import eslintPluginMarkdown from "eslint-plugin-markdown";
 import eslintPluginNoSecrets from "eslint-plugin-no-secrets";
 // import eslintPluginNoUnsanitized from "eslint-plugin-no-unsanitized";
 // https://github.com/mozilla/eslint-plugin-no-unsanitized/issues/241
-import eslintPluginNoUseExtendNative from "eslint-plugin-no-use-extend-native";
+// import eslintPluginNoUseExtendNative from "eslint-plugin-no-use-extend-native";
+// Warnings break circleci build
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import eslintPluginPromise from "eslint-plugin-promise";
@@ -25,7 +28,7 @@ export default [
   {
     ignores: [
       "!.circleci",
-      "**/__pycache__",
+      "**/__pycache__/",
       "**/*min.css",
       "**/*min.js",
       "*~",
@@ -44,9 +47,11 @@ export default [
   },
   js.configs.recommended,
   eslintPluginArrayFunc.configs.all,
+  eslintPluginCompat.configs[FLAT_RECOMMENDED],
+  eslintPluginDepend.configs[FLAT_RECOMMENDED],
   ...eslintPluginJsonc.configs["flat/recommended-with-jsonc"],
   ...eslintPluginMarkdown.configs.recommended,
-  eslintPluginNoUseExtendNative.configs.recommended,
+  // eslintPluginNoUseExtendNative.configs.recommended,
   // eslintPluginNoUnsanitized.configs.recommended,
   eslintPluginPrettierRecommended,
   eslintPluginPromise.configs[FLAT_RECOMMENDED],
@@ -72,19 +77,19 @@ export default [
       jsonc: eslintPluginJsonc,
       markdown: eslintPluginMarkdown,
       "no-secrets": eslintPluginNoSecrets,
-      "no-use-extend-native": eslintPluginNoUseExtendNative,
+      // "no-use-extend-native": eslintPluginNoUseExtendNative,
       // "no-unsantized": eslintPluginNoUnsanitized,
       prettier: eslintPluginPrettier,
       promise: eslintPluginPromise,
       security: eslintPluginSecurity,
       "simple-import-sort": eslintPluginSimpleImportSort,
-      // sonarjs: eslintPluginSonarjs,
       toml: eslintPluginToml,
       unicorn: eslintPluginUnicorn,
       yml: eslintPluginYml,
     },
     rules: {
       "array-func/prefer-array-from": "off", // for modern browsers the spread operator, as preferred by unicorn, works fine.
+      // "import/no-unresolved": ["error", { ignore: ["^[@]"] } ],
       "max-params": ["warn", 4],
       "no-console": "warn",
       "no-debugger": "warn",
@@ -94,22 +99,13 @@ export default [
       "simple-import-sort/exports": "warn",
       "simple-import-sort/imports": "warn",
       "space-before-function-paren": "off",
-      "unicorn/switch-case-braces": ["warn", "avoid"],
-      "unicorn/prefer-node-protocol": "off",
-      "unicorn/prevent-abbreviations": "off",
       "unicorn/filename-case": [
         "error",
         { case: "kebabCase", ignore: [".*.md"] },
       ],
-      /*
-     ...importPlugin.configs["recommended"].rules,
-     "import/no-unresolved": [
-       "error",
-       {
-         ignore: ["^[@]"],
-       },
-     ],
-     */
+      "unicorn/prefer-node-protocol": "off",
+      "unicorn/prevent-abbreviations": "off",
+      "unicorn/switch-case-braces": ["warn", "avoid"],
     },
   },
   {
@@ -122,8 +118,8 @@ export default [
   {
     files: ["**/*.md/*.js"], // Will match js code inside *.md files
     rules: {
-      "no-unused-vars": "off",
       "no-undef": "off",
+      "no-unused-vars": "off",
     },
   },
   {
