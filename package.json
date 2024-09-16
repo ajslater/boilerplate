@@ -3,8 +3,8 @@
   "description": "linting",
   "type": "module",
   "scripts": {
-    "fix": "eslint --cache --fix . && prettier --write .",
-    "lint": "eslint --cache . && prettier --check .",
+    "fix": "eslint_d --cache --fix . && prettierd --write .",
+    "lint": "eslint_d --cache . && prettierd --check .",
     "remark-check": "remark .",
     "remark-fix": "remark . --output"
   },
@@ -69,6 +69,7 @@
     "eslint-plugin-toml": "^0.11.0",
     "eslint-plugin-unicorn": "^55.0.0",
     "eslint-plugin-yml": "^1.14.0",
+    "eslint_d": "^14.0.3",
     "prettier": "^3.2.5",
     "prettier-plugin-nginx": "^1.0.3",
     "prettier-plugin-packagejson": "^2.5.0",
