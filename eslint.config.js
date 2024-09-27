@@ -50,7 +50,7 @@ export default [
   ...eslintPluginJsonc.configs["flat/recommended-with-jsonc"],
   ...eslintPluginMarkdown.configs.recommended,
   eslintPluginNoUseExtendNative.configs.recommended,
-  ...eslintPluginNoUnsanitized.configs.recommended,
+  eslintPluginNoUnsanitized.configs.recommended,
   eslintPluginPrettierRecommended,
   eslintPluginPromise.configs[FLAT_RECOMMENDED],
   eslintPluginRegexp.configs[FLAT_RECOMMENDED],
