@@ -130,6 +130,7 @@ export default [
     files: ["**/*.md/*.sh"],
     rules: {
       "prettier/prettier": ["error", { parser: "sh" }],
+      "sonarjs/no-implicit-global": "off",
     },
   },
   {
