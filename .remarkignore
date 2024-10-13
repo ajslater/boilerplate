@@ -1,9 +1,1 @@
-.circleci
-.git
-.mypy_cache
-.pytest_cache
-.ruff_cache
-.venv*
-/node_modules
-/test-results
-__pycache__
+.gitignore
