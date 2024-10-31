@@ -130,9 +130,16 @@ export default [
   },
   {
     files: ["**/*.md/*.sh"],
+    processor: "markdown/markdown",
     rules: {
       "prettier/prettier": ["error", { parser: "sh" }],
       "sonarjs/no-implicit-global": "off",
+    },
+  },
+  {
+    files: ["**/*.md/*.toml"],
+    rules: {
+      "prettier/prettier": ["error", { parser: "toml" }],
     },
   },
   {
