@@ -1,6 +1,6 @@
-import js from "@eslint/js";
-import eslintPluginJson from "@eslint/json";
-import eslintPluginMarkdown from "@eslint/markdown";
+import eslintJs from "@eslint/js";
+import eslintJson from "@eslint/json";
+import eslintMarkdown from "@eslint/markdown";
 import eslintPluginComments from "@eslint-community/eslint-plugin-eslint-comments/configs";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
@@ -44,13 +44,13 @@ export default [
       "typings/",
     ],
   },
-  js.configs.recommended,
+  eslintJs.configs.recommended,
   eslintPluginArrayFunc.configs.all,
   eslintPluginComments.recommended,
   eslintPluginCompat.configs[FLAT_RECOMMENDED],
   eslintPluginDepend.configs[FLAT_RECOMMENDED],
   eslintPluginImport.flatConfigs.recommended,
-  ...eslintPluginMarkdown.configs.recommended,
+  ...eslintMarkdown.configs.recommended,
   eslintPluginNoUnsanitized.configs.recommended,
   eslintPluginPrettierRecommended,
   eslintPluginPromise.configs[FLAT_RECOMMENDED],
@@ -75,8 +75,8 @@ export default [
     },
     plugins: {
       arrayFunc: eslintPluginArrayFunc,
-      json: eslintPluginJson,
-      markdown: eslintPluginMarkdown,
+      json: eslintJson,
+      markdown: eslintMarkdown,
       "no-secrets": eslintPluginNoSecrets,
       prettier: eslintPluginPrettier,
       promise: eslintPluginPromise,
