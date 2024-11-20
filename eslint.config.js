@@ -20,6 +20,7 @@ import eslintPluginYml from "eslint-plugin-yml";
 import globals from "globals";
 
 export const FLAT_RECOMMENDED = "flat/recommended";
+Object.freeze(FLAT_RECOMMENDED);
 
 export default [
   {
@@ -53,6 +54,7 @@ export default [
   eslintPluginMdx.flat,
   eslintPluginMdx.flatCodeBlocks,
   eslintPluginNoUnsanitized.configs.recommended,
+  eslintPluginPrettierRecommended,
   eslintPluginPromise.configs[FLAT_RECOMMENDED],
   eslintPluginRegexp.configs[FLAT_RECOMMENDED],
   eslintPluginSecurity.configs.recommended,
@@ -61,7 +63,6 @@ export default [
   eslintPluginUnicorn.configs[FLAT_RECOMMENDED],
   ...eslintPluginYml.configs[FLAT_RECOMMENDED],
   ...eslintPluginYml.configs["flat/prettier"],
-  eslintPluginPrettierRecommended,
   {
     languageOptions: {
       // eslint-plugin-import sets this to 2018.
