@@ -21,29 +21,31 @@ import globals from "globals";
 
 export const FLAT_RECOMMENDED = "flat/recommended";
 Object.freeze(FLAT_RECOMMENDED);
+export const IGNORES = [
+  "!.circleci",
+  "**/__pycache__/",
+  "**/*min.css",
+  "**/*min.js",
+  "**/*.json",
+  "*~",
+  ".git/",
+  ".mypy_cache/",
+  ".pytest_cache/",
+  ".ruff_cache/",
+  ".venv/",
+  "dist/",
+  "frontend/",
+  "node_modules/",
+  "package-lock.json",
+  "poetry.lock",
+  "test-results/",
+  "typings/",
+];
+Object.freeze(IGNORES);
 
 export default [
   {
-    ignores: [
-      "!.circleci",
-      "**/__pycache__/",
-      "**/*min.css",
-      "**/*min.js",
-      "**/*.json",
-      "*~",
-      ".git/",
-      ".mypy_cache/",
-      ".pytest_cache/",
-      ".ruff_cache/",
-      ".venv/",
-      "dist/",
-      "frontend/",
-      "node_modules/",
-      "package-lock.json",
-      "poetry.lock",
-      "test-results/",
-      "typings/",
-    ],
+    ignores: IGNORES,
   },
   eslintJs.configs.recommended,
   eslintPluginArrayFunc.configs.all,

@@ -168,7 +168,7 @@ extend-select = [
   "FBT",
   "FIX",
   "FLY",
-  "FURB",
+  #"FURB", # Preview 0.7.4
   # "G",
   "I",
   "ICN",
