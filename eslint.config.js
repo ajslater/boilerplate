@@ -1,6 +1,7 @@
 import eslintJs from "@eslint/js";
 import eslintJson from "@eslint/json";
 import eslintPluginComments from "@eslint-community/eslint-plugin-eslint-comments/configs";
+import eslintPluginStylistic from "@stylistic/eslint-plugin";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
 import eslintPluginCompat from "eslint-plugin-compat";
@@ -36,7 +37,7 @@ export const CONFIGS = {
     ...eslintPluginPromise.configs[FLAT_RECOMMENDED],
     ...eslintPluginRegexp.configs[FLAT_RECOMMENDED],
     ...eslintPluginSonarjs.configs.recommended,
-    //...eslintPluginUnicorn.configs[FLAT_ALL],
+    // ...eslintPluginUnicorn.configs[FLAT_ALL],
     plugins: {
       depend: eslintPluginDepend,
       "no-secrets": eslintPluginNoSecrets,
@@ -99,6 +100,7 @@ export default [
   },
   eslintPluginPrettierRecommended,
   eslintPluginSecurity.configs.recommended,
+  eslintPluginStylistic.configs["all-flat"],
   {
     languageOptions: {
       globals: {
