@@ -1,4 +1,4 @@
-# ajs boilerplate
+# AJ's Boilerplate
 
 Scripts for developing python apps with javascript frontends.
 
