@@ -16,6 +16,8 @@ uvx toml set --toml-path=pyproject.toml build-system.build-backend hatchling.bui
 uvx toml add_section --toml-path=pyproject.toml tool.hatch.build.targets.sdist
 uvx toml set --toml-path=pyproject.toml tool.hatch.build.targets.sdist.include "$BUILD_INCLUDE"
 uvx toml set --toml-path=pyproject.toml tool.hatch.build.targets.sdist.exclude "$BUILD_EXCLUDE"
+uvx toml set --toml-path=pyproject.toml tool.pyright.venvPath '.'
+uvx toml set --toml-path=pyproject.toml tool.pyright.venv '.venv'
 
 rm -rf builder-requirements.txt bin/update-builder-requirement.sh __pycache__ .venv uv.lock
 find . \( -path "./bin" -o -path "./node_modules" -o -path "./frontend" -o -path "./test-results" -o -path "./.git" -o -path "./.venv" \) -prune -o -type f -exec sed -i '' -e 's/poetry.lock/uv.lock/g' {} \;
