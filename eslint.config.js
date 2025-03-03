@@ -37,7 +37,7 @@ export const CONFIGS = {
     ...eslintPluginPromise.configs[FLAT_RECOMMENDED],
     ...eslintPluginRegexp.configs[FLAT_RECOMMENDED],
     ...eslintPluginSonarjs.configs.recommended,
-    // ...eslintPluginUnicorn.configs[FLAT_ALL],
+    ...eslintPluginUnicorn.configs.recommended,
     plugins: {
       depend: eslintPluginDepend,
       "no-secrets": eslintPluginNoSecrets,
@@ -66,7 +66,6 @@ export const CONFIGS = {
       "simple-import-sort/exports": "warn",
       "simple-import-sort/imports": "warn",
       "space-before-function-paren": "off",
-      ...eslintPluginUnicorn.configs[FLAT_RECOMMENDED].rules,
       "unicorn/filename-case": [
         "error",
         { case: "kebabCase", ignore: [".*.md"] },

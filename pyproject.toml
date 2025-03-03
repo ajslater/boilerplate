@@ -1,5 +1,5 @@
 [project]
-name = "AJSlater-Boilerplate"
+name = "boilerplate"
 version = "0.1.0"
 description = ""
 authors = [{ name = "AJ Slater", email = "aj@slater.net" }]
@@ -53,6 +53,7 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.sdist]
 include = "['', 'tests']"
 exclude = "['*/**/*~']"
+
 [tool.codespell]
 skip = './cache,./dist,./test-results,.git,.mypy_cache,.pytest_cache,.venv*,node_modules,package-lock.json,uv.lock,run.spec'
 builtin = 'clear,rare,code'
