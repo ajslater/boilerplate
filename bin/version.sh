@@ -7,6 +7,8 @@ if [ "$VERSION" = "" ]; then
   uv run toml get "$TOML_PATH" project.version
 else
   uv run toml set "$TOML_PATH" project.version "$VERSION"
-  cd frontend
-  npm version --allow-same-version "$VERSION"
+  if [ -d frontend ]; then
+    cd frontend
+    npm version --allow-same-version "$VERSION"
+  fi
 fi
