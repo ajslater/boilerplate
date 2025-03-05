@@ -1,5 +1,7 @@
 .PHONY: install-deps
 ## Update pip and install node packages
+## @category Install
+install-deps:
 	pip install --upgrade pip
 	npm install
 
@@ -37,19 +39,13 @@ build:
 ## Publish package to pypi
 ## @category Deploy
 publish:
-	UV_PUBLISH_TOKEN=$PYPI_PASS uv publish
+	uv publish
 
 .PHONY: update
 ## Update dependencies
 ## @category Update
 update:
 	./bin/update-deps.sh
-
-.PHONY: update-builder
-## Update builder requirements
-## @category Update
-update-builder:
-	./bin/update-builder-requirement.sh
 
 ## Show version. Use V variable to set version
 ## @category Update
