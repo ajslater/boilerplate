@@ -20,14 +20,21 @@ uv run toml add_section "$TOML_PATH" build-system
 uv run toml set "$TOML_PATH" build-system.requires --to-array '["hatchling"]'
 uvx toml set "$TOML_PATH" build-system.build-backend hatchling.build
 uv run toml add_section "$TOML_PATH" tool.hatch.build.targets.sdist
-uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.include "$BUILD_INCLUDE"
-uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.exclude "$BUILD_EXCLUDE"
+uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.include --to-array "$BUILD_INCLUDE"
+uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.exclude --to-array "$BUILD_EXCLUDE"
 echo "Configure pyright for venv..."
 uv run toml set "$TOML_PATH" tool.pyright.venvPath '.'
 uv run toml set "$TOML_PATH" tool.pyright.venv '.venv'
 
+CCI_CONFIG=.circleci/config.yml
+if [ -f "$CCI_CONFIG" ]; then
+  echo "Configure circleci for uv..."
+  uv run yq eval '.jobs.deploy.docker[0].image =  ghcr.io/astral-sh/uv:bookworm-slim' -i "$CCI_CONFIG"
+  uv run yq eval '.jobs.deploy.steps[1].run = uv publish' -i "$CCI_CONFIG"
+fi
+
 echo "Remove old files..."
-rm -rf builder-requirements.txt bin/update-builder-requirement.sh bin/publish-pypi.sh __pycache__ .venv uv.lock
+rm -rf builder-requirements.txt bin/update-builder-requirement.sh bin/publish-pypi.sh __pycache__ .venv uv.lock poetry.lock
 echo "Replace referenecs to poetry.lock with uv.lock"
 find . \( -path "./bin" -o -path "./node_modules" -o -path "./frontend" -o -path "./test-results" -o -path "./.git" -o -path "./.venv" \) -prune -o -type f -exec sed -i '' -e 's/poetry.lock/uv.lock/g' {} \;
 
