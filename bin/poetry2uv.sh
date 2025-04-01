@@ -1,12 +1,12 @@
 #!/bin/bash
 # Convert a poetry project to uv
-set -euo pipefail
+set -euxo pipefail
 echo "Changing build dependencies to hatchling..."
 poetry add -D hatchling toml-cli
 poetry remove wheel || true
 
-echo "Convrting pyproject.toml..."
-uv run pdm import pyproject.toml
+echo "Converting pyproject.toml..."
+uvx pdm import pyproject.toml
 
 TOML_PATH=--toml-path=pyproject.toml
 printf "\tSaving build configuration..."
@@ -18,7 +18,7 @@ uv run toml unset "$TOML_PATH" tool.poetry
 printf "\tConfigure new build system..."
 uv run toml add_section "$TOML_PATH" build-system
 uv run toml set "$TOML_PATH" build-system.requires --to-array '["hatchling"]'
-uvx toml set "$TOML_PATH" build-system.build-backend hatchling.build
+uv run toml set "$TOML_PATH" build-system.build-backend hatchling.build
 uv run toml add_section "$TOML_PATH" tool.hatch.build.targets.sdist
 uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.include --to-array "$BUILD_INCLUDE"
 uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.exclude --to-array "$BUILD_EXCLUDE"
