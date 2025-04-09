@@ -2,6 +2,7 @@ import eslintJs from "@eslint/js";
 import eslintJson from "@eslint/json";
 import eslintPluginComments from "@eslint-community/eslint-plugin-eslint-comments/configs";
 import eslintPluginStylistic from "@stylistic/eslint-plugin";
+import { defineConfig } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginArrayFunc from "eslint-plugin-array-func";
 import eslintPluginCompat from "eslint-plugin-compat";
@@ -78,8 +79,9 @@ export const CONFIGS = {
 };
 Object.freeze(CONFIGS);
 
-export default [
+export default defineConfig([
   {
+    name: "globalIgnores",
     ignores: [
       "!.circleci",
       "**/__pycache__/",
@@ -176,4 +178,4 @@ export default [
     },
   },
   eslintConfigPrettier, // Best if last
-];
+]);
