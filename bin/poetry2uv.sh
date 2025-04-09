@@ -1,6 +1,6 @@
 #!/bin/bash
 # Convert a poetry project to uv
-set -euxo pipefail
+set -euo pipefail
 echo "Changing build dependencies to hatchling..."
 poetry add -D hatchling toml-cli
 poetry remove wheel || true
@@ -11,17 +11,23 @@ uvx pdm import pyproject.toml
 TOML_PATH=--toml-path=pyproject.toml
 printf "\tSaving build configuration..."
 BUILD_INCLUDE=$(uv run toml get "$TOML_PATH" tool.pdm.build.includes) || true
+BUILD_INCLUDE=${BUILD_INCLUDE//\'/\"}
 BUILD_EXCLUDE=$(uv run toml get "$TOML_PATH" tool.pdm.build.excludes) || true
+BUILD_EXCLUDE=${BUILD_EXCLUDE//\'/\"}
 printf "\tRemoving old sections..."
 uv run toml unset "$TOML_PATH" tool.pdm
 uv run toml unset "$TOML_PATH" tool.poetry
 printf "\tConfigure new build system..."
 uv run toml add_section "$TOML_PATH" build-system
-uv run toml set "$TOML_PATH" build-system.requires --to-array '["hatchling"]'
-uv run toml set "$TOML_PATH" build-system.build-backend hatchling.build
+uvx --with pdm toml set "$TOML_PATH" build-system.requires --to-array '["hatchling"]'
+uvx --with pdm toml set "$TOML_PATH" build-system.build-backend hatchling.build
 uv run toml add_section "$TOML_PATH" tool.hatch.build.targets.sdist
-uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.include --to-array "$BUILD_INCLUDE"
-uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.exclude --to-array "$BUILD_EXCLUDE"
+if [ "$BUILD_INCLUDE" != "" ]; then
+  uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.include --to-array "$BUILD_INCLUDE"
+fi
+if [ "$BUILD_EXCLUDE" != "" ]; then
+  uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.exclude --to-array "$BUILD_EXCLUDE"
+fi
 echo "Configure pyright for venv..."
 uv run toml set "$TOML_PATH" tool.pyright.venvPath '.'
 uv run toml set "$TOML_PATH" tool.pyright.venv '.venv'
@@ -29,8 +35,8 @@ uv run toml set "$TOML_PATH" tool.pyright.venv '.venv'
 CCI_CONFIG=.circleci/config.yml
 if [ -f "$CCI_CONFIG" ]; then
   echo "Configure circleci for uv..."
-  uv run yq eval '.jobs.deploy.docker[0].image =  ghcr.io/astral-sh/uv:bookworm-slim' -i "$CCI_CONFIG"
-  uv run yq eval '.jobs.deploy.steps[1].run = uv publish' -i "$CCI_CONFIG"
+  uv run yq eval '.jobs.deploy.docker[0].image = "ghcr.io/astral-sh/uv:bookworm-slim"' -i "$CCI_CONFIG"
+  uv run yq eval '.jobs.deploy.steps[1].run = "uv publish"' -i "$CCI_CONFIG"
 fi
 
 echo "Remove old files..."
