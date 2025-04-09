@@ -5,38 +5,63 @@ echo "Changing build dependencies to hatchling..."
 poetry add -D hatchling toml-cli
 poetry remove wheel || true
 
-echo "Converting pyproject.toml..."
-uvx pdm import pyproject.toml
+uvr() {
+  uv run --no-install-project "$@"
+}
 
 TOML_PATH=--toml-path=pyproject.toml
+toml_get() {
+  uvr toml get "$TOML_PATH" "$@"
+}
+
+toml_set() {
+  uvr toml set "$TOML_PATH" "$@"
+}
+toml_unset() {
+  uvr toml unset "$TOML_PATH" "$@"
+}
+toml_add_section() {
+  uvr toml add_section "$TOML_PATH" "$@"
+}
+pdm_toml_set() {
+  #uvx --with pdm project toml set "$TOML_PATH" "$@"
+  toml_set "$@"
+}
+yq_eval() {
+  uvr yq eval "$@"
+}
+
+echo "Converting pyproject.toml..."
+uvx --no-install-project pdm import pyproject.toml
+
 printf "\tSaving build configuration..."
-BUILD_INCLUDE=$(uv run toml get "$TOML_PATH" tool.pdm.build.includes) || true
+BUILD_INCLUDE=$(toml_get tool.pdm.build.includes) || true
 BUILD_INCLUDE=${BUILD_INCLUDE//\'/\"}
-BUILD_EXCLUDE=$(uv run toml get "$TOML_PATH" tool.pdm.build.excludes) || true
+BUILD_EXCLUDE=$(toml_get tool.pdm.build.excludes) || true
 BUILD_EXCLUDE=${BUILD_EXCLUDE//\'/\"}
 printf "\tRemoving old sections..."
-uv run toml unset "$TOML_PATH" tool.pdm
-uv run toml unset "$TOML_PATH" tool.poetry
+toml_unset tool.pdm
+toml_unset tool.poetry
 printf "\tConfigure new build system..."
-uv run toml add_section "$TOML_PATH" build-system
-uvx --with pdm toml set "$TOML_PATH" build-system.requires --to-array '["hatchling"]'
-uvx --with pdm toml set "$TOML_PATH" build-system.build-backend hatchling.build
-uv run toml add_section "$TOML_PATH" tool.hatch.build.targets.sdist
+toml_add_section build-system
+pdm_toml_set build-system.requires --to-array '["hatchling"]'
+pdm_toml_set build-system.build-backend hatchling.build
+toml_add_section tool.hatch.build.targets.sdist
 if [ "$BUILD_INCLUDE" != "" ]; then
-  uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.include --to-array "$BUILD_INCLUDE"
+  toml_set tool.hatch.build.targets.sdist.include --to-array "$BUILD_INCLUDE"
 fi
 if [ "$BUILD_EXCLUDE" != "" ]; then
-  uv run toml set "$TOML_PATH" tool.hatch.build.targets.sdist.exclude --to-array "$BUILD_EXCLUDE"
+  toml_set tool.hatch.build.targets.sdist.exclude --to-array "$BUILD_EXCLUDE"
 fi
 echo "Configure pyright for venv..."
-uv run toml set "$TOML_PATH" tool.pyright.venvPath '.'
-uv run toml set "$TOML_PATH" tool.pyright.venv '.venv'
+toml_set tool.pyright.venvPath '.'
+toml_set tool.pyright.venv '.venv'
 
 CCI_CONFIG=.circleci/config.yml
 if [ -f "$CCI_CONFIG" ]; then
   echo "Configure circleci for uv..."
-  uv run yq eval '.jobs.deploy.docker[0].image = "ghcr.io/astral-sh/uv:bookworm-slim"' -i "$CCI_CONFIG"
-  uv run yq eval '.jobs.deploy.steps[1].run = "uv publish"' -i "$CCI_CONFIG"
+  yq_eval '.jobs.deploy.docker[0].image = "ghcr.io/astral-sh/uv:bookworm-slim"' -i "$CCI_CONFIG"
+  yq_eval '.jobs.deploy.steps[1].run = "uv publish"' -i "$CCI_CONFIG"
 fi
 
 echo "Remove old files..."
