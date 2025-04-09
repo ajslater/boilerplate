@@ -5,30 +5,25 @@ echo "Changing build dependencies to hatchling..."
 poetry add -D hatchling toml-cli
 poetry remove wheel || true
 
-uvr() {
-  uv run --no-install-project "$@"
-}
-
 TOML_PATH=--toml-path=pyproject.toml
 toml_get() {
-  uvr toml get "$TOML_PATH" "$@"
+  uv run toml get "$TOML_PATH" "$@"
 }
 
 toml_set() {
-  uvr toml set "$TOML_PATH" "$@"
+  uv run toml set "$TOML_PATH" "$@"
 }
 toml_unset() {
-  uvr toml unset "$TOML_PATH" "$@"
+  uv run toml unset "$TOML_PATH" "$@"
 }
 toml_add_section() {
-  uvr toml add_section "$TOML_PATH" "$@"
+  uv run toml add_section "$TOML_PATH" "$@"
 }
 pdm_toml_set() {
-  #uvx --with pdm project toml set "$TOML_PATH" "$@"
-  toml_set "$@"
+  uvx --with pdm project toml set "$TOML_PATH" "$@"
 }
 yq_eval() {
-  uvr yq eval "$@"
+  uv run yq eval "$@"
 }
 
 echo "Converting pyproject.toml..."
