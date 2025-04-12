@@ -100,15 +100,10 @@ fi
 echo "Done!"
 echo
 
-echo 1. Bin Scripts
-echo 1.1 Copy new bin scripts from boilerplate
-echo "1.2. Activate hadolint & circlecicheck in bin/lint-backend.sh if appropriate."
-echo 1.3. Diff new bin scripts.
-echo 2. Fix Makefile from boilerplate.
-echo 3. Build config
-echo 3.1 Fix docker-compose.yaml
-echo 3.2. Fix Dockerfiles to use nikolaik/python-nodejs
+echo 1. Scripts
+echo 1.1. Copy new bin scripts from boilerplate
+echo 1.2. Copy Makefile from boilerplate.
+echo 3. Build
+echo 3.1. Fix Dockerfiles to use nikolaik/python-nodejs:latest
+echo 3.2. Fix docker-compose.yaml
 echo 3.3. Create new token on pypi for circleci
-echo 4. Project File
-echo "4.1. Format & order pyproject.toml"
-echo 4.2. Fix versions to use tilde versions where appropriate.
