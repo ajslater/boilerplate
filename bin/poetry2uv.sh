@@ -85,6 +85,7 @@ mkdir test-results
 pyclean
 echo "Replace referenecs to poetry.lock with uv.lock"
 find . \( -path "*~" -o -path "./.venv*" -o -path "./dist" -o -path "./node_modules" -o -path "./frontend" -o -path "./test-results" -o -path "./.git" \) -prune -o -type f -exec sed -i '' -e 's/poetry.lock/uv.lock/g' {} \;
+find . \( -path "*~" -o -path "./.venv*" -o -path "./dist" -o -path "./node_modules" -o -path "./frontend" -o -path "./test-results" -o -path "./.git" \) -prune -o -type f -name "*.sh" -exec sed -i '' -e 's/poetry run/uv run/g' {} \;
 
 echo "Update project dependencies"
 uv sync --all-extras --no-install-project
