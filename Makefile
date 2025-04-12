@@ -73,12 +73,6 @@ fix: fix-frontend fix-backend
 fix-backend:
 	./bin/fix-lint-backend.sh
 
-.PHONY: fix-frontend
-## Fix only frontend lint errors
-## @category Lint
-fix-frontend:
-	bash -c "cd frontend && make fix"
-
 .PHONY: lint
 ## Lint front and back end
 ## @category Lint
@@ -89,12 +83,6 @@ lint: lint-frontend lint-backend
 ## @category Lint
 lint-backend:
 	./bin/lint-backend.sh
-
-.PHONY: lint-frontend
-## Lint the frontend
-## @category Lint
-lint-frontend:
-	bash -c "cd frontend && make lint"
 
 ## Test
 ## @category Test
@@ -110,12 +98,6 @@ test:
 ## @category Run
 dev-server:
 	./bin/dev-server.sh
-
-.PHONY: dev-frontend
-## Run the vite dev frontend
-## @category Run
-dev-frontend-server:
-	bash -c "cd frontend && make dev-server"
 
 .PHONY: news
 ## Show recent NEWS

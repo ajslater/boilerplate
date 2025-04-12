@@ -1,0 +1,19 @@
+.PHONY: fix-frontend
+## Fix only frontend lint errors
+## @category Lint
+fix-frontend:
+	bash -c "cd frontend && make fix"
+
+
+.PHONY: lint-frontend
+## Lint the frontend
+## @category Lint
+lint-frontend:
+	bash -c "cd frontend && make lint"
+
+
+.PHONY: dev-frontend
+## Run the vite dev frontend
+## @category Run
+dev-frontend-server:
+	bash -c "cd frontend && make dev-server"
