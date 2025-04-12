@@ -2,8 +2,8 @@
 # Convert a poetry project to uv
 set -euxo pipefail
 echo "Changing build dependencies to hatchling..."
-poetry add -D hatchling toml-cli
 poetry remove wheel || true
+poetry add -D hatchling toml-cli
 
 TOML_PATH=--toml-path=pyproject.toml
 toml_get() {
@@ -60,9 +60,11 @@ if [ -f "$CCI_CONFIG" ]; then
 fi
 
 echo "Remove old files..."
-rm -rf builder-requirements.txt bin/update-builder-requirement.sh bin/publish-pypi.sh __pycache__ .venv uv.lock poetry.lock
+rm -rf  .pytest_cache .ruff_cache .venv* builder-requirements.txt bin/publish-pypi.sh bin/update-builder-requirement.sh poetry.lock test-results uv.lock 
+mkdir test-results
+pyclean
 echo "Replace referenecs to poetry.lock with uv.lock"
-find . \( -path "./bin" -o -path "./node_modules" -o -path "./frontend" -o -path "./test-results" -o -path "./.git" -o -path "./.venv" \) -prune -o -type f -exec sed -i '' -e 's/poetry.lock/uv.lock/g' {} \;
+find . \( -path "*~" -o -path "./.venv*" -o -path "./dist" -o -path "./node_modules" -o -path "./frontend" -o -path "./test-results" -o -path "./.git" \) -prune -o -type f -exec sed -i '' -e 's/poetry.lock/uv.lock/g' {} \;
 
 echo "Update project dependencies"
 uv sync --all-extras --no-install-project
