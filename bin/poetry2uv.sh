@@ -1,6 +1,6 @@
 #!/bin/bash
 # Convert a poetry project to uv
-set -euo pipefail
+set -euxo pipefail
 echo "Changing build dependencies to hatchling..."
 poetry add -D hatchling toml-cli
 poetry remove wheel || true
@@ -20,14 +20,14 @@ toml_add_section() {
   uv run toml add_section "$TOML_PATH" "$@"
 }
 pdm_toml_set() {
-  uvx --with pdm project toml set "$TOML_PATH" "$@"
+  uvx --with pdm toml set "$TOML_PATH" "$@"
 }
 yq_eval() {
   uv run yq eval "$@"
 }
 
 echo "Converting pyproject.toml..."
-uvx --no-install-project pdm import pyproject.toml
+uvx pdm import pyproject.toml
 
 printf "\tSaving build configuration..."
 BUILD_INCLUDE=$(toml_get tool.pdm.build.includes) || true
@@ -72,8 +72,7 @@ echo
 
 echo 1. Bin Scripts
 echo 1.1 Copy new bin scripts from boilerplate
-echo 1.2. Activate hadolint &
-circlecicheck in bin/lint-backend.sh if appropriate.
+echo "1.2. Activate hadolint & circlecicheck in bin/lint-backend.sh if appropriate."
 echo 1.3. Diff new bin scripts.
 echo 2. Fix Makefile from boilerplate.
 echo 3. Build config
@@ -81,6 +80,5 @@ echo 3.1 Fix docker-compose.yaml
 echo 3.2. Fix Dockerfiles to use nikolaik/python-nodejs
 echo 3.3. Create new token on pypi for circleci
 echo 4. Project File
-echo 4.1. Format &
-order pyproject.toml
+echo "4.1. Format & order pyproject.toml"
 echo 4.2. Fix versions to use tilde versions where appropriate.
