@@ -1,3 +1,14 @@
+ HELL := /usr/bin/env bash
+
+## Show version. Use V variable to set version
+## @category Update
+V :=
+.PHONY: version
+## Show or set project version
+## @category Update
+version:
+	bin/version.sh $(V)
+
 .PHONY: install-deps
 ## Update pip and install node packages
 ## @category Install
@@ -47,31 +58,28 @@ publish:
 update:
 	./bin/update-deps.sh
 
-## Show version. Use V variable to set version
-## @category Update
-V :=
-.PHONY: version
-## Show or set project version
-## @category Update
-version:
-	bin/version.sh $(V)
-
 .PHONY: kill-eslint_d
 ## Kill eslint daemon
 ## @category Lint
 kill-eslint_d:
 	bin/kill-eslint_d.sh
 
-.PHONY: fix
-## Fix front and back end lint errors
-## @category Lint
-fix: fix-backend
-
 .PHONY: fix-backend
 ## Fix only backend lint errors
-## @category Lint
+## @category Fix
 fix-backend:
 	./bin/fix-lint-backend.sh
+
+.PHONY: fix
+## Fix front and back end lint errors
+## @category Fix
+fix: fix-backend
+
+.PHONY typecheck
+## Static typecheck
+## @category Lint
+typecheck:
+	uv run pyright .
 
 .PHONY: lint
 ## Lint front and back end
