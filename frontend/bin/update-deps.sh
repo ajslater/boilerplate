@@ -1,5 +1,5 @@
 #!/bin/bash
 # Update npm dependencies
-set -euo pipefal
+set -euo pipefail
 npm update
 npm outdated
