@@ -65,7 +65,7 @@ kill-eslint_d:
 .PHONY: fix
 ## Fix front and back end lint errors
 ## @category Lint
-fix: fix-frontend fix-backend
+fix: fix-backend
 
 .PHONY: fix-backend
 ## Fix only backend lint errors
@@ -76,7 +76,7 @@ fix-backend:
 .PHONY: lint
 ## Lint front and back end
 ## @category Lint
-lint: lint-frontend lint-backend
+lint: lint-backend
 
 .PHONY: lint-backend
 ## Lint the backend

@@ -5,23 +5,6 @@ echo "Changing build dependencies to hatchling..."
 poetry remove wheel || true
 poetry add -D hatchling toml-cli
 
-while getopts "cd" opt; do
-    case $opt in
-        d)
-            echo "Project uses Dockerfiles"
-            ENABLE_DOCKERFILES=1
-            ;;
-        c)
-            echo "Project uses circleci"
-            ENABLE_CIRCLECLI=1
-            ;;
-        \?)
-            echo "Invalid option: -$OPTARG" >&2
-            exit 1
-            ;;
-    esac
-done
-
 TOML_PATH=--toml-path=pyproject.toml
 toml_get() {
     uv run toml get "$TOML_PATH" "$@"
@@ -90,13 +73,7 @@ find . \( -path "*~" -o -path "./.venv*" -o -path "./dist" -o -path "./node_modu
 echo "Update project dependencies"
 uv sync --all-extras --no-install-project
 
-if [ "$ENABLE_DOCKERFILES" ]; then
-    bin/enable-hadolint.sh
-fi
-
-if [ "$ENABLE_CIRCLECLI" ]; then
-    bin/enable-circleci-validate.sh
-fi
+bin/enable-lints.sh "$@"
 
 echo "Done!"
 echo
