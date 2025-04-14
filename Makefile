@@ -1,4 +1,4 @@
- HELL := /usr/bin/env bash
+SHELL := /usr/bin/env bash
 
 ## Show version. Use V variable to set version
 ## @category Update
@@ -75,7 +75,7 @@ fix-backend:
 ## @category Fix
 fix: fix-backend
 
-.PHONY typecheck
+.PHONY: typecheck
 ## Static typecheck
 ## @category Lint
 typecheck:
