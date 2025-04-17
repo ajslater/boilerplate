@@ -52,7 +52,7 @@ echo "Configure pyright for venv..."
 toml_set tool.pyright.venvPath '.'
 toml_set tool.pyright.venv '.venv'
 
-# Hatchling build system gets set last becuase it may interfere with uv run before this
+# Hatchling build system gets set last because it may interfere with uv run before this
 pdm_toml_set build-system.requires --to-array '["hatchling"]'
 pdm_toml_set build-system.build-backend hatchling.build
 
