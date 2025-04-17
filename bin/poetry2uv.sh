@@ -35,22 +35,26 @@ BUILD_INCLUDE=${BUILD_INCLUDE//\'/\"}
 BUILD_EXCLUDE=$(toml_get tool.pdm.build.excludes) || true
 BUILD_EXCLUDE=${BUILD_EXCLUDE//\'/\"}
 printf "\tRemoving old sections..."
-toml_unset tool.pdm
-toml_unset tool.poetry
 printf "\tConfigure new build system..."
 toml_add_section build-system
-pdm_toml_set build-system.requires --to-array '["hatchling"]'
-pdm_toml_set build-system.build-backend hatchling.build
-toml_add_section tool.hatch.build.targets.sdist
+if [ "$BUILD_INCLUDE" != "" ] || [ "$BUILD_EXCLUDE" != "" ]; then
+  toml_add_section tool.hatch.build.targets.sdist
+fi
 if [ "$BUILD_INCLUDE" != "" ]; then
   toml_set tool.hatch.build.targets.sdist.include --to-array "$BUILD_INCLUDE"
 fi
 if [ "$BUILD_EXCLUDE" != "" ]; then
   toml_set tool.hatch.build.targets.sdist.exclude --to-array "$BUILD_EXCLUDE"
 fi
+toml_unset tool.pdm
+toml_unset tool.poetry
 echo "Configure pyright for venv..."
 toml_set tool.pyright.venvPath '.'
 toml_set tool.pyright.venv '.venv'
+
+# Hatchling build system gets set last becuase it may interfere with uv run before this
+pdm_toml_set build-system.requires --to-array '["hatchling"]'
+pdm_toml_set build-system.build-backend hatchling.build
 
 CCI_CONFIG=.circleci/config.yml
 if [ -f "$CCI_CONFIG" ]; then
@@ -69,7 +73,7 @@ mkdir test-results
 echo "Update project dependencies"
 uv sync --all-extras --no-install-project
 
-pyclean
+pyclean .
 
 echo "Replace referenecs to poetry.lock with uv.lock"
 find . \( -path "*~" -o -path "./.venv*" -o -path "./dist" -o -path "./node_modules" -o -path "./frontend" -o -path "./test-results" -o -path "./.git" \) -prune -o -type f -exec sed -i '' -e 's/poetry.lock/uv.lock/g' {} \;
