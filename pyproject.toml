@@ -15,7 +15,7 @@ classifiers = [
   "Programming Language :: JavaScript",
   "Programming Language :: Python :: 3 :: Only",
 ]
-dependencies = []
+dependencies = ["typing-extensions>=4.13.2"]
 
 [project.urls]
 News = "https://github.com/ajslater/"
