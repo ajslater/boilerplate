@@ -58,7 +58,7 @@ exclude = [
   "dist",
   "test-results",
   "typings",
-  "vulture_whitelist.py",
+  "vulture_ignorelist.py",
 ]
 pythonVersion = "3.10"
 failOnWarnings = false
@@ -98,6 +98,7 @@ omit = [
   "node_modules/*",
   "test-results/*",
   "typings/*",
+  "vulture_ignorelist.py",
 ]
 
 [tool.pytest.ini_options]
@@ -120,7 +121,14 @@ exclude = "*~,.*,.*/*,__pycache__/*,dist/*,node_modules/*,test-results/*,typings
 target-version = "py310"
 
 [tool.ruff]
-extend-exclude = ["**/.*", "**/__pycache__", "dist", "test-results", "typings"]
+extend-exclude = [
+  "**/.*",
+  "**/__pycache__",
+  "dist",
+  "test-results",
+  "typings",
+  "vulture_ignorelist.py",
+]
 
 [tool.ruff.lint]
 extend-ignore = [
