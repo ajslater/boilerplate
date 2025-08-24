@@ -13,8 +13,8 @@ description = ""
 keywords = []
 license = "GPL-3.0-only"
 name = "boilerplate"
-requires-python = "<4.0,>=3.10"
 readme = "README.md"
+requires-python = "<4.0,>=3.10"
 version = "0.1.0"
 
 [project.urls]
