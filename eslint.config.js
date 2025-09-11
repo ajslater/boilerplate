@@ -28,7 +28,6 @@ export const FLAT_RECOMMENDED = "flat/recommended";
 
 export const CONFIGS = {
   js: {
-    /* eslint-disable security/detect-object-injection */
     ...eslintJs.configs.recommended,
     ...eslintPluginArrayFunc.configs.all,
     ...eslintPluginComments.recommended,
@@ -40,7 +39,6 @@ export const CONFIGS = {
     ...eslintPluginRegexp.configs[FLAT_RECOMMENDED],
     ...eslintPluginSonarjs.configs.recommended,
     ...eslintPluginUnicorn.configs.recommended,
-    /* eslint-enable */
     plugins: {
       depend: eslintPluginDepend,
       "no-secrets": eslintPluginNoSecrets,
@@ -57,6 +55,7 @@ export const CONFIGS = {
       "no-console": "warn",
       "no-debugger": "warn",
       "no-secrets/no-secrets": "error",
+      "security/detect-object-injection": "off",
       "simple-import-sort/exports": "warn",
       "simple-import-sort/imports": "warn",
     },
@@ -135,7 +134,6 @@ export default defineConfig([
       "prettier/prettier": ["warn", { parser: "markdown" }],
     },
   },
-  /* eslint-disable security/detect-object-injection */
   ...eslintPluginToml.configs[FLAT_BASE],
   {
     files: ["**/*.toml", "**/*.md/*.toml"],
@@ -153,7 +151,6 @@ export default defineConfig([
       "prettier/prettier": ["error", { parser: "yaml" }],
     },
   },
-  /* eslint-enable */
   {
     files: [
       "**/certbot.yaml",
