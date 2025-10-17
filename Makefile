@@ -88,9 +88,9 @@ ty:
 	uv run ty check .
 
 .PHONY: zuban
-## Static typecheck with ty
+## Static typecheck with zuban
 ## @category Lint
-ty:
+zuban:
 	uv run zuban check
 
 .PHONY: lint
