@@ -155,7 +155,7 @@ export default defineConfig([
   {
     files: [
       "**/certbot.yaml",
-      "**/docker-compose*.yaml",
+      "**/compose*.yaml",
       "**/.*_treestamps.yaml",
     ],
     rules: {
