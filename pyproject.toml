@@ -22,7 +22,7 @@ News = "https://github.com/ajslater/"
 Homepage = "https://github.com/ajslater/"
 Documentation = "https://github.com/ajslater/"
 "Docker Image" = "https://hub.docker.com/r/ajslater/"
-"Issues" = "https://github.com/ajslater/"
+Issues = "https://github.com/ajslater/"
 Source = "https://github.com/ajslater/"
 
 [dependency-groups]
