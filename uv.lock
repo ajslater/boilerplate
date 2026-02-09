@@ -113,10 +113,10 @@ lint = [
     { name = "codespell", specifier = "~=2.4" },
     { name = "complexipy", specifier = "~=5.1" },
     { name = "djlint", specifier = "~=1.3.dev0" },
-    { name = "mbake", specifier = ">=1.4.5" },
+    { name = "mbake", specifier = "~=1.4.5" },
     { name = "radon", extras = ["toml"], specifier = "~=6.0" },
-    { name = "ruff", specifier = "~=0.13" },
-    { name = "ty", specifier = "~=0.0.4" },
+    { name = "ruff", specifier = "~=0.15" },
+    { name = "ty", specifier = "~=0.0.15" },
     { name = "types-python-dateutil", specifier = "~=2.9" },
     { name = "vulture", specifier = "~=2.3" },
 ]
