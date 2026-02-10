@@ -30,8 +30,9 @@ if [ "$(uname)" = "Darwin" ]; then
   shellharden --check ./**/*.sh
   # subdirs aren't copied into docker builder
   # .env files aren't copied into docker
-  # dockerfmt ci/*Dockerfile --check
   shellcheck --external-sources ./**/*.sh
+  # dockerfmt ./*Dockerfile --check
+  mbake validate Makefile
   # circleci config validate .circleci/config.yml
 fi
 ./bin/roman.sh -i .prettierignore .

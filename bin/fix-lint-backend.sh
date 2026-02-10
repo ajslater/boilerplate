@@ -24,7 +24,12 @@ npm run fix
 ###################
 shellharden --replace ./**/*.sh
 
+#####################
+###### Makefile #####
+#####################
+mbake format Makefile
+
 #######################
 ###### Dockerfile #####
 #######################
-# dockerfmt ci/*Dockerfile --write
+# dockerfmt ./*Dockerfile --write
