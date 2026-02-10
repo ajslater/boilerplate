@@ -64,7 +64,7 @@ if [ -f "$CCI_CONFIG" ]; then
 fi
 
 echo "Moving [project] to top of pyproject.toml"
-bin/reorg-pyproject.awk pyproject.toml > pyproject.temp && mv pyproject.temp pyproject.toml
+bin/reorg-pyproject.awk pyproject.toml >pyproject.temp && mv pyproject.temp pyproject.toml
 
 echo "Remove old files..."
 rm -rf .pytest_cache .ruff_cache .venv* builder-requirements.txt bin/publish-pypi.sh bin/update-builder-requirement.sh poetry.lock test-results uv.lock
