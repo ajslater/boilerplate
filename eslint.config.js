@@ -107,12 +107,12 @@ export default defineConfig([
     },
   },
   {
-    files: ["**/*.js"],
-    ...CONFIGS.js,
-  },
-  {
     files: ["**/*.html"],
     plugins: { html: eslintPluginHtml },
+  },
+  {
+    files: ["**/*.js"],
+    ...CONFIGS.js,
   },
   {
     files: ["**/*.json", "**/*.md/*.json"],
